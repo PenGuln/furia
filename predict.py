@@ -20,13 +20,13 @@ def prepare_model(model_file):
 	model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 	return model
 
-
 def predict(model):
 	X = np.zeros(1800, dtype = np.float32)
 	data = []
 	for line in sys.stdin:
 		Ld = line.strip().split()
-		data = data + Ld
+		xx = [float(item) for item in Ld]
+		data = data + xx
 		if (len(data) >= 1800):
 			data = np.array(data, dtype = np.float32)
 			for i in range(1800):
@@ -41,6 +41,7 @@ if __name__ == '__main__':
 	os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
 	os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 	model_file = sys.argv[1]
+	os.remove(os.path.join(os.path.dirname(model_file), 'model.h5'))
 	os.symlink(model_file, os.path.join(os.path.dirname(model_file), 'model.h5'))
 	model = prepare_model(os.path.join(os.path.dirname(model_file), 'model.h5'))
 	predict(model)
