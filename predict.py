@@ -41,6 +41,6 @@ if __name__ == '__main__':
 	os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
 	os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 	model_file = sys.argv[1]
-	os.symlink(model_file, os.path.join(os.dirname(model_file), 'model.h5'))
+	os.symlink(model_file, os.path.join(os.path.dirname(model_file), 'model.h5'))
 	model = prepare_model(model_file)
 	predict(model)
