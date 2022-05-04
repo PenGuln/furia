@@ -20,27 +20,26 @@ def prepare_model(model_file):
 	model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 	return model
 
-def read_data():
-	inputx = np.zeros(1800, dtype = np.float32)
+
+def predict(model):
+	X = np.zeros(1800, dtype = np.float32)
 	data = []
 	for line in sys.stdin:
 		Ld = line.strip().split()
-		if (len(Ld) == 0): break
 		data = data + Ld
-	data = np.array(data, dtype = np.float32)
-	for i in range(len(data)): 
-		inputx[i] = data[i]
-	inputx = inputx.reshape((1, 20, 90))
-	return inputx
-
-def predict(model):
-	X = read_data()
-	predict = model.predict(X)
-	classification = np.argmax(predict, axis = 1)
-	print(classification[0])
+		if (len(data) >= 1800):
+			data = np.array(data, dtype = np.float32)
+			for i in range(1800):
+				X[i] = data[i]
+			data = []
+			X = X.reshape((1, 20, 90))
+			predict = model.predict(X)
+			classification = np.argmax(predict, axis = 1)
+			print(classification[0])
 
 if __name__ == '__main__':
 	os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
+	os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 	model_file = sys.argv[1]
 	model = prepare_model(model_file)
 	predict(model)

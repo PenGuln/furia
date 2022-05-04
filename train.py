@@ -49,6 +49,7 @@ def fit_new_model(trainX, trainy, base_model, new_model):
 	model.save_weights(new_model)
 
 if __name__ == '__main__':
+	os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 	arg = sys.argv
 	data_dir = arg[1]
 	new_model_path =  arg[2]
