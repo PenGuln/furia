@@ -10,15 +10,33 @@ from keras.utils.np_utils import to_categorical
 
 def load_data(data_dir):
 	filelist = os.listdir(data_dir)
-	trainX = read_csv(os.path.join(data_dir, 'xtrain.csv'), header = None).values
-	trainy = read_csv(os.path.join(data_dir, 'ytrain.csv'), header = None).values
+	namelist = ['sit', 'stand', 'walk', 'upstairs', 'downstairs', 'run']
+	Label = {'sit':0, 'stand':1, 'walk':2, 'upstairs': 3, 'downstairs': 4, 'run': 5}
+	trainX = []
+	trainy = []
+	window = 20
+	for name in namelist:
+		tx = read_csv(os.path.join(data_dir, name + '.csv'), header = None).values
+		for i in range(tx.shape[0] - window):
+			data1s = []
+			for j in range(window):
+				data1s = data1s + list(tx[i + j])
+			trainX.append(data1s)
+			trainy.append(Label[name])
+
+	#trainX = read_csv(os.path.join(data_dir, 'xtrain.csv'), header = None).values
+	#trainy = read_csv(os.path.join(data_dir, 'ytrain.csv'), header = None).values
+	#trainX = trainX.reshape(trainX.shape[0], 20, 90)
+	trainX = np.array(trainX)
 	trainX = trainX.reshape(trainX.shape[0], 20, 90)
+	trainy = np.array(trainy)
+	trainy = trainy.reshape(-1, 1)
 	trainy = to_categorical(trainy)
 	return trainX, trainy
  
 # fit an model from base_model
 def fit_new_model(trainX, trainy, base_model, new_model):
-	verbose, epochs, batch_size = 1, 20, 5
+	verbose, epochs, batch_size = 1, 15, 32
 	n_timesteps, n_features, n_outputs = trainX.shape[1], trainX.shape[2], trainy.shape[1]
 
 	model = Sequential()
