@@ -7,7 +7,6 @@ from keras.layers import Dense
 from keras.layers import Dropout
 from keras.layers import LSTM
 from keras.utils.np_utils import to_categorical
-
 def load_data(data_dir):
 	filelist = os.listdir(data_dir)
 	namelist = ['sit', 'stand', 'walk', 'upstairs', 'downstairs', 'run']
