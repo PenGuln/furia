@@ -46,7 +46,7 @@ def fit_new_model(trainX, trainy, base_model, new_model):
 	model.load_weights(base_model)
 	model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 	model.fit(trainX, trainy, epochs = epochs, batch_size = batch_size, verbose = verbose)
-	model.save_weights(new_model)
+	model.save_weights(new_model, save_format = 'h5')
 
 if __name__ == '__main__':
 	os.environ["CUDA_VISIBLE_DEVICES"]="-1"
@@ -54,6 +54,12 @@ if __name__ == '__main__':
 	data_dir = arg[1]
 	new_model_path =  arg[2]
 	base_model_path = arg[3]
+
+	link_file = os.path.join(os.path.dirname(base_model_path), 'model.h5')
+	if (os.path.exists(link_file)):
+		os.remove(link_file)
+	os.symlink(base_model_path, link_file)
+
 	trainX, trainy = load_data(data_dir)
-	fit_new_model(trainX, trainy, base_model_path, new_model_path)
+	fit_new_model(trainX, trainy, link_file, new_model_path)
 
