@@ -2,7 +2,7 @@
     {
       "name": "lstm",
       "display": "LSTM",
-      "descriprion": "LSTM is a blah blah blah algorithm that....",
+      "descriprion": "LSTM is suitable for processing and predicting important events with very long interval and delay in time series.",
       "entrypoint": {
         "train": ["/usr/bin/env", "python3", "algo/lstm/train.py"],
         "predict": ["/usr/bin/env", "python3", "algo/lstm/predict.py"]
@@ -11,7 +11,7 @@
     {
       "name": "randomforest",
       "display": "RF",
-      "descriprion": "RF is a blah blah blah algorithm that....",
+      "descriprion": "RF is a highly flexible machine learning algorithm which can adapt to high-dimensional data aiming to increase running speed and reduce resource occupation.",
       "entrypoint": {
         "train": ["/usr/bin/env", "python3", "algo/randomforest/train.py"],
         "predict": ["/usr/bin/env", "python3", "algo/randomforest/predict.py"]
