@@ -2,3 +2,5 @@ keras==2.8.0
 numpy==1.22.3
 pandas==1.4.2
 tensorflow==2.8.0
+joblib==1.0.1
+sklearn==0.24.1

@@ -1,0 +1,20 @@
+[
+    {
+      "name": "lstm",
+      "display": "LSTM",
+      "descriprion": "LSTM is a blah blah blah algorithm that....",
+      "entrypoint": {
+        "train": ["/usr/bin/env", "python3", "algo/lstm/train.py"],
+        "predict": ["/usr/bin/env", "python3", "algo/lstm/predict.py"]
+      }
+    },
+    {
+      "name": "randomforest",
+      "display": "RF",
+      "descriprion": "RF is a blah blah blah algorithm that....",
+      "entrypoint": {
+        "train": ["/usr/bin/env", "python3", "algo/randomforest/train.py"],
+        "predict": ["/usr/bin/env", "python3", "algo/randomforest/predict.py"]
+      }
+    }
+  ]
