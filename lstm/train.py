@@ -1,4 +1,5 @@
 import os
+os.environ["CUDA_VISIBLE_DEVICES"]='/cpu:0'
 import sys
 import numpy as np
 from pandas import read_csv
@@ -25,9 +26,9 @@ def load_data(data_dir):
 
 	#trainX = read_csv(os.path.join(data_dir, 'xtrain.csv'), header = None).values
 	#trainy = read_csv(os.path.join(data_dir, 'ytrain.csv'), header = None).values
-	#trainX = trainX.reshape(trainX.shape[0], 20, 90)
+	#trainX = trainX.reshape(trainX.shape[0], 20, 45)
 	trainX = np.array(trainX)
-	trainX = trainX.reshape(trainX.shape[0], 20, 90)
+	trainX = trainX.reshape(trainX.shape[0], 20, 45)
 	trainy = np.array(trainy)
 	trainy = trainy.reshape(-1, 1)
 	trainy = to_categorical(trainy)
@@ -49,7 +50,6 @@ def fit_new_model(trainX, trainy, base_model, new_model):
 	model.save_weights(new_model, save_format = 'h5')
 
 if __name__ == '__main__':
-	os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 	arg = sys.argv
 	data_dir = arg[1]
 	new_model_path =  arg[2]

@@ -9,7 +9,7 @@ from keras.layers import Dropout
 from keras.layers import LSTM
 def predict(model_file):
 	n_timesteps = 20
-	n_features = 90 
+	n_features = 45 
 	n_outputs = 6
 	model = Sequential()
 	model.add(LSTM(100, input_shape=(n_timesteps, n_features)))
@@ -24,9 +24,9 @@ def predict(model_file):
 		Ld = line.strip().split(',')
 		xx = [float(item) for item in Ld]
 		data = data + xx
-		if (len(data) >= 1800):
-			data = data[-1800:]
-			X = np.array(data).reshape((1, 20, 90))
+		if (len(data) >= 900):
+			data = data[-900:]
+			X = np.array(data).reshape((1, n_timesteps, n_features))
 			predict = model.predict(X)
 			classification = np.argmax(predict, axis = 1)
 			print(classification[0])

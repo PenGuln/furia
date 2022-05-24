@@ -23,7 +23,7 @@ def load_data(data_dir):
 	#trainy = read_csv(os.path.join(data_dir, 'ytrain.csv'), header = None).values
 	#trainX = trainX.reshape(trainX.shape[0], 20, 90)
 	trainX = np.array(trainX)
-	trainX = trainX.reshape(trainX.shape[0], 1800)
+	trainX = trainX.reshape(trainX.shape[0], 900)
 	trainy = np.array(trainy)
 	return trainX, trainy
 
