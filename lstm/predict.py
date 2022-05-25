@@ -30,6 +30,7 @@ def predict(model_file):
 			predict = model.predict(X)
 			classification = np.argmax(predict, axis = 1)
 			print(classification[0])
+			sys.stdout.flush()
 		line = sys.stdin.readline()
 
 if __name__ == '__main__':

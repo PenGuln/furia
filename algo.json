@@ -1,20 +1,22 @@
-[
-    {
-      "name": "lstm",
-      "display": "LSTM",
-      "descriprion": "LSTM is suitable for processing and predicting important events with very long interval and delay in time series.",
-      "entrypoint": {
-        "train": ["/usr/bin/env", "python3", "algo/lstm/train.py"],
-        "predict": ["/usr/bin/env", "python3", "algo/lstm/predict.py"]
-      }
-    },
-    {
-      "name": "randomforest",
-      "display": "RF",
-      "descriprion": "RF is a highly flexible machine learning algorithm which can adapt to high-dimensional data aiming to increase running speed and reduce resource occupation.",
-      "entrypoint": {
-        "train": ["/usr/bin/env", "python3", "algo/randomforest/train.py"],
-        "predict": ["/usr/bin/env", "python3", "algo/randomforest/predict.py"]
-      }
+{
+  "lstm": { 
+    "name": "lstm", 
+    "display": "LSTM",
+    "desc": "LSTM is suitable for processing and predicting important events with very long interval and delay in time series.",
+    "base": "$ALGO/lstm/basemodel_lstm.h5",
+    "entrypoint": {
+      "train": ["/usr/bin/env", "python3", "$ALGO/lstm/train.py"],
+      "predict": ["/usr/bin/env", "python3", "$ALGO/lstm/predict.py"]
     }
-  ]
+  },
+  "randomforest": { 
+    "name": "randomforest", 
+    "display": "RF",
+    "desc": "RF is a highly flexible machine learning algorithm which can adapt to high-dimensional data aiming to increase running speed and reduce resource occupation.",
+    "base": "$ALGO/randomforest/basemodel_randomforest",
+    "entrypoint": {
+      "train": ["/usr/bin/env", "python3", "$ALGO/randomforest/train.py"],
+      "predict": ["/usr/bin/env", "python3", "$ALGO/randomforest/predict.py"]
+    }
+  }
+}

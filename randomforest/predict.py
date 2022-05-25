@@ -15,6 +15,7 @@ def predict(model_file):
 			X = np.array(data).reshape((1, 900))
 			predict = model.predict(X)
 			print(predict[0])
+			sys.stdout.flush()
 		line = sys.stdin.readline()
 
 if __name__ == '__main__':
