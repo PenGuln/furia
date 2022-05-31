@@ -11,15 +11,17 @@ def load_data(data_dir):
 	trainy = []
 	window = 20
 	for name in namelist:
-		tx = read_csv(os.path.join(data_dir, name + '.csv'), header = None).values[:,0:45]
-		if (tx.shape[0] < window):
-			break
-		for i in range(tx.shape[0] - window):
-			data1s = []
-			for j in range(window):
-				data1s = data1s + list(tx[i + j])
-			trainX.append(data1s)
-			trainy.append(Label[name])
+		datafile = os.path.join(data_dir, name + '.csv')
+		if (os.path.exists(datafile)):
+			tx = read_csv(datafile, header = None).values[:,0:45]
+			if (tx.shape[0] < window):
+				break
+			for i in range(tx.shape[0] - window):
+				data1s = []
+				for j in range(window):
+					data1s = data1s + list(tx[i + j])
+				trainX.append(data1s)
+				trainy.append(Label[name])
 
 	#trainX = read_csv(os.path.join(data_dir, 'xtrain.csv'), header = None).values
 	#trainy = read_csv(os.path.join(data_dir, 'ytrain.csv'), header = None).values
