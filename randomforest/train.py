@@ -12,6 +12,8 @@ def load_data(data_dir):
 	window = 20
 	for name in namelist:
 		tx = read_csv(os.path.join(data_dir, name + '.csv'), header = None).values[:,0:45]
+		if (tx.shape[0] < window):
+			break
 		for i in range(tx.shape[0] - window):
 			data1s = []
 			for j in range(window):
